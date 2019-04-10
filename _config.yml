@@ -1,7 +1,7 @@
 # Site settings
 title: Allen的数字世界
 SEOTitle: Allenの博客
-header-img: img/background.jpg
+header-img: img/background2.jpg
 email: a332999245@gmail.com
 description: "自娱自乐"
 keyword: "ALLEN, Blog, Allenの博客, allenhsu, 音乐, 机器人, 电影, 旅行"
@@ -18,7 +18,7 @@ sidebar-avatar: /img/allenhsu.jpg      # use absolute URL, seeing it's used in b
 
 # SNS settings
 RSS: false
-weibo_username:     17610071006
+#weibo_username:     17610071006
 github_username:    allenhsu6
 jianshu_username:   48ca62094660
 #twitter_username:   allenhsu
@@ -72,7 +72,7 @@ gitalk:
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id: b50bf2b12b5338a1845e33832976fd68
+ba_track_id: a3c42ebf28f22455b478b19327467485
 
 # Google Analytics
 ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
@@ -84,7 +84,7 @@ ga_domain: allenhsu.top               # 默认的是 auto, 这里我是自定义
 
 # Featured Tags
 featured-tags: true                     # 是否使用首页标签
-featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
+featured-condition-size: 2              # 相同标签数量大于这个数，才会出现在首页
 
 
 

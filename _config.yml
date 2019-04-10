@@ -1,10 +1,10 @@
 # Site settings
 title: Allen的数字世界
 SEOTitle: Allenの博客
-header-img: img/post-bg-desk.jpg
+header-img: img/background.jpg
 email: a332999245@gmail.com
 description: "自娱自乐"
-keyword: "ALLEN, Blog, Allenの博客, allenhsu, 音乐, java, 电影, 旅行"
+keyword: "ALLEN, Blog, Allenの博客, allenhsu, 音乐, 机器人, 电影, 旅行"
 url: "http://allenhsu6.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/allenhsu/allenhsu.github.io.git" # you code repository

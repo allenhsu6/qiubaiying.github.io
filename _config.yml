@@ -62,10 +62,10 @@ valine_comment:
     leancloud_appid: MXEApl7pgtvYjbDuAicHONMt-gzGzoHsz
     leancloud_appkey: R8EplVyHG8amwRJbw476NXoD
     placeholder: "ヾﾉ≧∀≦)o! Leave some comments..."
-    notify: false #收到回复是否Email通知
-    verify: false #回复验证码
-    avatar: robohash #gravatar 头像默认风格
-    pageSize: 10 #评论页面大小
+    notify: false
+    verify: false
+    avatar: ''
+    pageSize: 10
 # Gitalk
 gitalk:
   enable: true    #是否开启Gitalk评论

@@ -61,13 +61,16 @@ valine_comment:
     enable: true
     leancloud_appid: MXEApl7pgtvYjbDuAicHONMt-gzGzoHsz
     leancloud_appkey: R8EplVyHG8amwRJbw476NXoD
-    placeholder: "Leave some comments..."
-
+    placeholder: "ヾﾉ≧∀≦)o! Leave some comments..."
+    notify: false #收到回复是否Email通知
+    verify: false #回复验证码
+    avatar: robohash #gravatar 头像默认风格
+    pageSize: 10 #评论页面大小
 # Gitalk
 gitalk:
-  enable: false    #是否开启Gitalk评论
-  clientID: f2c84e7629bb1446c1a4                            #生成的clientID
-  clientSecret: ca6d6139d1e1b8c43f8b2e19492ddcac8b322d0d    #生成的clientSecret
+  enable: true    #是否开启Gitalk评论
+  clientID: 99f19a1aaf8f377c81f1                            #生成的clientID
+  clientSecret: c3bc4c87b6f1ce84a2802eb8fb57a877f40d9e01    #生成的clientSecret
   repo: allenhsu6.github.io    #仓库名称
   owner: allenhsu6    #github用户名
   admin: allenhsu6

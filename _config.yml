@@ -68,7 +68,7 @@ valine_comment:
     pageSize: 10
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
+  enable: false    #是否开启Gitalk评论
   clientID: 99f19a1aaf8f377c81f1                            #生成的clientID
   clientSecret: c3bc4c87b6f1ce84a2802eb8fb57a877f40d9e01    #生成的clientSecret
   repo: allenhsu6.github.io    #仓库名称

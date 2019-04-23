@@ -1,0 +1,28 @@
+---
+layout: post
+title: 在xbot机器人上使用teb_local_planner算法
+date: 2019-04-22
+author: Allen
+header-img: img/4_12_book.jpg
+catalog: true
+tags:
+  - 机器人
+  - 运动规划
+---
+
+## 一些概念
+自适应蒙特卡洛：
+1. 当发现粒子点平均分突变的时候（机器人绑架），通过全局重新撒点进行计算
+2. 根据聚集程度判断粒子足够精确的时候，降低需要维护的粒子数目，减少计算开销
+
+代价地图：
+1. 静态层static_layer：map_server提供
+2. 障碍层obstacle_layer: 激光雷达提供
+3. 全局膨胀层global_inflation_layer
+4. 局部膨胀层local_inflation_layer
+
+## 使用teb路径规划算法
+#### 安装
+在xbot机器人上配置使用teb路径规划算法，根据这个教程来实现
+
+https://blog.csdn.net/xiekaikaibing/article/details/80197164

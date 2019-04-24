@@ -120,7 +120,7 @@ geometry_msgs/TwistWithCovariance twist
   float64[36] covariance
 ```
 
-## 当前待解决的疑问
+## 当前待解决的问题列表
 
 1. LaserScan和PointCloud是哪个传感器发出的？
 2. local_planner怎么利用其他信息进行局部规划？
@@ -131,12 +131,125 @@ geometry_msgs/TwistWithCovariance twist
 7. odom 坐标系到底是指什么？谁在维护这个frame？odom这个topic发布什么类型的msg？
 8. 需要看一下nav_msgs/OccupancyGrid.msg中的Pose具体是什么? 在柴老师视频中，他说这是，当前初始地图相对/map这个frame的变化关系。这里需要验证！
 9. 查看/tf这个topic的样子
-10. 残留工作： service要学习，action要学习，tf的收发也要学习，需要在机器人平台上过一遍。
+
+残留工作： service要学习，action要学习，需要在机器人平台上过一遍。
 
 **回答：**
 
-##### 第八题
-odom本身代表里程计，实际应用中可以是轮子上的编码器，也可以是摄像头做视觉里程计或IMU。slam核心节点会订阅/tf，这个/tf必须包含/odom和/base_link之间的变化关系，通常这个odom信息的就是上述各式各样的里程计来维护。具体tf变换如何维护，我这里还不是很清楚！！（**坑**）
+##### 第一题：LaserScan和PointCloud
+
+这部分参考了文章[ROS之发布传感器数据（LaserScan和PointCloud][3]，文章单独实现了两种数据格式的收发，值得看一看
+目前导航功能包集只接受使用sensor_msgs/LaserScan或sensor_msgs/PointCloud消息类型发布的传感器数据
+
+个人分析认为：LaserScan是二维，PointCloud是三维
+LaserScan 属于/scan话题
+具体信息格式如下：
+
+```
+std_msgs/Header header
+  uint32 seq
+  time stamptf这个topic的样子
+  string frame_id
+  #
+  # 测量的激光扫描角度，逆时针为正
+  # 设备坐标帧的0度面向前（沿着X轴方向）
+  #
+  float32 angle_min        # scan的开始角度 [弧度]
+  float32 angle_max        # scan的结束角度 [弧度]
+  float32 angle_increment  # 测量的角度间的距离 [弧度]
+  float32 time_increment   # 测量间的时间 [秒]
+  float32 scan_time        # 扫描间的时间 [秒]
+  float32 range_min        # 最小的测量距离 [米]
+  float32 range_max        # 最大的测量距离 [米]
+  float32[] ranges         # 测量的距离数据 [米] (注意: 值 < range_min 或 > range_max 应当被丢弃)
+  float32[] intensities    # 强度数据 [device-specific units] 可以利用其判断材质
+
+======举个例子============
+
+header:
+  seq: 9019
+  stamp:
+    secs: 1556090239
+    nsecs: 420321047
+  frame_id: "laser"
+angle_min: -3.12413907051
+angle_max: 3.14159274101
+angle_increment: 0.0174532923847
+time_increment: 0.000220614529098
+scan_time: 0.079200617969
+range_min: 0.15000000596
+range_max: 12.0
+ranges: "<array type: float32, length: 360>"
+intensities: "<array type: float32, length: 360>"
+
+```
+
+PointClouds msg格式如下：
+
+```
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+geometry_msgs/Point32[] points
+  float32 x
+  float32 y
+  float32 z
+sensor_msgs/ChannelFloat32[] channels
+  string name
+  float32[] values
+
+```
+
+PointCloud2的msg格式：
+
+```
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+uint32 height
+uint32 width
+#  这个是选择数据格式
+sensor_msgs/PointField[] fields
+  uint8 INT8=1
+  uint8 UINT8=2
+  uint8 INT16=3
+  uint8 UINT16=4
+  uint8 INT32=5
+  uint8 UINT32=6
+  uint8 FLOAT32=7
+  uint8 FLOAT64=8
+  string name
+  uint32 offset
+  uint8 datatype
+  uint32 count
+bool is_bigendian
+uint32 point_step
+uint32 row_step
+uint8[] data
+bool is_dense
+
+```
+
+##### 第二题
+
+
+##### 第三题
+
+
+##### 第四题
+
+
+##### 第五题
+
+
+##### 第六题
+
+
+##### 第七题 针对/odom的探究  ×
+
+odom本身代表里程计，实际应用中可以是轮子上的编码器，也可以是摄像头做视觉里程计或IMU。slam核心节点会订阅/tf，这个/tf必须包含/odom和/base_link之间的变化关系，通常这个odom信息的就是上述各式各样的里程计来维护。
 
 这里需要去了解tf具体工作机制。 通常slam定位的工作，就是slam核心节点发布的/tf，这个/tf包含/map frame到/odom frame的信息
 
@@ -151,7 +264,10 @@ odom本身代表里程计，实际应用中可以是轮子上的编码器，也�
 
 这里还需要考虑，就比从如amcl使用粒子滤波，他是怎么做这个事情的？是怎么弥补odom和map之间的误差的？
 
-##### 第九题
+##### 第八题
+
+
+##### 第九题 TF topic具体内容
 **第一部分：** 节点维护的一小段的tf（两个frame之间的link，也就是boardcaster）需要发送的数据格式： TransformStamped.msg:
 
 ```
@@ -181,6 +297,9 @@ geometry_msgs/Transform transform   // 向量表示平移，四元数表示旋�
 
 [1]:  https://blog.csdn.net/xiekaikaibing/article/details/80197164
 [2]:  http://www.cnblogs.com/W-chocolate/p/4328725.html
+[3]:  https://blog.csdn.net/zong596568821xp/article/details/79111061
+
 
 1. https://blog.csdn.net/xiekaikaibing/article/details/80197164
 2. http://www.cnblogs.com/W-chocolate/p/4328725.html
+3. https://blog.csdn.net/zong596568821xp/article/details/79111061

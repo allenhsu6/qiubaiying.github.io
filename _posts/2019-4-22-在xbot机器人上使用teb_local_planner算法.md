@@ -141,6 +141,8 @@ geometry_msgs/TwistWithCovariance twist
 这部分参考了文章[ROS之发布传感器数据（LaserScan和PointCloud][3]，文章单独实现了两种数据格式的收发，值得看一看
 目前导航功能包集只接受使用sensor_msgs/LaserScan或sensor_msgs/PointCloud消息类型发布的传感器数据
 
+这部分今后准备再单独写一个cpp文件，测试对应的激光雷达信息。
+
 个人分析认为：LaserScan是二维，PointCloud是三维
 LaserScan 属于/scan话题
 具体信息格式如下：
